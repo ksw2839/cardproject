@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class card : MonoBehaviour
+public class Card : MonoBehaviour
 {
+    [SerializeField] SpriteRenderer spriteRenderer;
     public Animator ani;
     
     // Start is called before the first frame update
@@ -16,6 +17,13 @@ public class card : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // builder pattern
+    public Card SetFrontSprite(Sprite sprite)
+    {
+        spriteRenderer.sprite = sprite;
+        return this;
     }
 
     public void Click()

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private GameManager() { }
 
     public static GameManager I { get; private set; }
-    public GameObject card;
+    public Card card;
     public GameObject endTxt;
     public Text timeTxt;
     float checkTime = 0;
@@ -30,14 +30,16 @@ public class GameManager : MonoBehaviour
         Transform cards = GameObject.Find("cards").transform;
         for (int i = 0; i<16; i++)
         {
-            GameObject newCard = Instantiate(card);
+            Card newCard = Instantiate(card);
             newCard.transform.parent = cards;
             float x = (i / 4) * 1.4f - 2.1f;
             float y = (i % 4) * 1.4f -3f;
             newCard.transform.position = new Vector3(x, y, 0);
 
             string rtanName = "rtan" + rtans[i];
-            newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(rtanName);
+
+            Sprite sprite = Resources.Load<Sprite>(rtanName);
+            newCard.SetFrontSprite(sprite);
         }
     }
 
@@ -61,8 +63,8 @@ public class GameManager : MonoBehaviour
 
         if (firstCardImage == secondCardImage)
         {
-            firstCard.GetComponent<card>().DestroyCardI();
-            secondCard.GetComponent<card>().DestroyCardI();
+            firstCard.GetComponent<Card>().DestroyCardI();
+            secondCard.GetComponent<Card>().DestroyCardI();
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
             if (cardsLeft == 2)
@@ -73,8 +75,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            firstCard.GetComponent<card>().CloseCardI();
-            secondCard.GetComponent<card>().CloseCardI();
+            firstCard.GetComponent<Card>().CloseCardI();
+            secondCard.GetComponent<Card>().CloseCardI();
         }
 
         firstCard = null;

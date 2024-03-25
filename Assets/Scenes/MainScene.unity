@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d9535bf3e7a4243a4819df0717d3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 1080669371595775529, guid: 86de90dc0a844544d8e04d88e0def712, type: 3}
+  card: {fileID: 7512829593173754724, guid: 86de90dc0a844544d8e04d88e0def712, type: 3}
   endTxt: {fileID: 529518483}
   timeTxt: {fileID: 608788257}
   firstCard: {fileID: 0}

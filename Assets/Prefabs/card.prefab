@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7227255050212774446}
-  - component: {fileID: 5037228745202968409}
+  - component: {fileID: 7512829593173754724}
   - component: {fileID: -2886017329730082297}
   - component: {fileID: 388606131482542631}
   m_Layer: 0
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 3464549558316388527}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5037228745202968409
+--- !u!114 &7512829593173754724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6437936fd7e30c46984bd70ec19457c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 5253427519804678712}
   ani: {fileID: 388606131482542631}
 --- !u!114 &-2886017329730082297
 MonoBehaviour:
@@ -93,8 +94,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5037228745202968409}
-        m_TargetAssemblyTypeName: card, Assembly-CSharp
+      - m_Target: {fileID: 7512829593173754724}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
         m_MethodName: Click
         m_Mode: 1
         m_Arguments:
