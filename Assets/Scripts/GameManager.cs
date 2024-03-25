@@ -6,13 +6,17 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager I;
+    private GameManager() { }
+
+    public static GameManager I { get; private set; }
     public GameObject card;
     public GameObject endTxt;
     public Text timeTxt;
     float checkTime = 0;
     public GameObject firstCard;
     public GameObject secondCard;
+
+
 
     private void Awake()
     {
@@ -23,10 +27,11 @@ public class GameManager : MonoBehaviour
     {
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1f,1f)).ToArray();
-        for(int i = 0; i<16; i++)
+        Transform cards = GameObject.Find("cards").transform;
+        for (int i = 0; i<16; i++)
         {
             GameObject newCard = Instantiate(card);
-            newCard.transform.parent = GameObject.Find("cards").transform;
+            newCard.transform.parent = cards;
             float x = (i / 4) * 1.4f - 2.1f;
             float y = (i % 4) * 1.4f -3f;
             newCard.transform.position = new Vector3(x, y, 0);
