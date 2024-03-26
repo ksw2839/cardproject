@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject endTxt;
     public Text timeTxt;
     float checkTime = 0;
-    public GameObject firstCard;
-    public GameObject secondCard;
+
+    public Card firstCard, secondCard;
 
     private void Awake()
     {
@@ -30,16 +30,18 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i<16; i++)
         {
+            int index = rtans[i];
             Card newCard = Instantiate(card);
 
             float x = (i / 4) * 1.4f - 2.1f;
             float y = (i % 4) * 1.4f - 3f;
-            string rtanName = "rtan" + rtans[i];
+            string rtanName = "rtan" + index;
             Sprite sprite = Resources.Load<Sprite>(rtanName);
 
             newCard.SetFrontSprite(sprite)
                    .SetParent(cards)
-                   .SetPosition(new Vector3(x, y, 0));
+                   .SetPosition(new Vector3(x, y, 0))
+                   .SetIndex(index);
         }
     }
 
@@ -58,15 +60,15 @@ public class GameManager : MonoBehaviour
 
     public void Match()
     {
-        string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
-        string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
+        int index1 = firstCard.index;
+        int index2 = secondCard.index;
 
-        if (firstCardImage == secondCardImage)
+        if (index1 == index2)
         {
-            firstCard.GetComponent<Card>().DestroyCardI();
-            secondCard.GetComponent<Card>().DestroyCardI();
+            firstCard.DestroyCardI();
+            secondCard.DestroyCardI();
 
-            int cardsLeft = GameObject.Find("cards").transform.childCount;
+            int cardsLeft = cards.childCount;
             if (cardsLeft == 2)
             {
                 endTxt.SetActive(true);
@@ -75,8 +77,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            firstCard.GetComponent<Card>().CloseCardI();
-            secondCard.GetComponent<Card>().CloseCardI();
+            firstCard.CloseCardI();
+            secondCard.CloseCardI();
         }
 
         firstCard = null;

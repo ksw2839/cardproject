@@ -7,7 +7,8 @@ public class Card : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Animator ani;
-    
+    public int index { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,12 @@ public class Card : MonoBehaviour
     public Card SetParent(Transform parent)
     {
         transform.parent = parent;
+        return this;
+    }
+
+    public Card SetIndex(int index)
+    {
+        this.index = index;
         return this;
     }
 
@@ -46,11 +53,11 @@ public class Card : MonoBehaviour
 
         if(GameManager.I.firstCard == null)
         {
-            GameManager.I.firstCard = gameObject;
+            GameManager.I.firstCard = this;
         }
         else
         {
-            GameManager.I.secondCard = gameObject;
+            GameManager.I.secondCard = this;
             GameManager.I.Match();
         }
 
