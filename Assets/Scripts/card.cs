@@ -10,17 +10,6 @@ public class Card : MonoBehaviour
     [SerializeField] Animator ani;
     public int index { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public Card SetParent(Transform parent)
     {
         transform.parent = parent;
@@ -61,9 +50,8 @@ public class Card : MonoBehaviour
             GameManager.I.secondCard = this;
             GameManager.I.Match();
         }
-
-        
     }
+
     public void DestroyCardI()
     {
         Invoke("DestroyCard", 1f);
