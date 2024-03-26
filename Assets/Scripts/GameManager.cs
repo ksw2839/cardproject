@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+
 public class GameManager : MonoBehaviour
 {
     private GameManager() { }
 
     public static GameManager I { get; private set; }
+    public Transform cards;
     public Card card;
     public GameObject endTxt;
     public Text timeTxt;
@@ -16,30 +18,28 @@ public class GameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
 
-
-
     private void Awake()
     {
-        I = this; 
+        I = this;
     }
     // Start is called before the first frame update
     void Start()
     {
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1f,1f)).ToArray();
-        Transform cards = GameObject.Find("cards").transform;
+
         for (int i = 0; i<16; i++)
         {
             Card newCard = Instantiate(card);
-            newCard.transform.parent = cards;
+
             float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f -3f;
-            newCard.transform.position = new Vector3(x, y, 0);
-
+            float y = (i % 4) * 1.4f - 3f;
             string rtanName = "rtan" + rtans[i];
-
             Sprite sprite = Resources.Load<Sprite>(rtanName);
-            newCard.SetFrontSprite(sprite);
+
+            newCard.SetFrontSprite(sprite)
+                   .SetParent(cards)
+                   .SetPosition(new Vector3(x, y, 0));
         }
     }
 

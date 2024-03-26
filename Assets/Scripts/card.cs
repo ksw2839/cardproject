@@ -6,7 +6,7 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
-    public Animator ani;
+    [SerializeField] Animator ani;
     
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,18 @@ public class Card : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public Card SetParent(Transform parent)
+    {
+        transform.parent = parent;
+        return this;
+    }
+
+    public Card SetPosition(Vector3 position)
+    {
+        transform.position = position;
+        return this;
     }
 
     // builder pattern
