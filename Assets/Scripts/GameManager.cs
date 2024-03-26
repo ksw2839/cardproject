@@ -7,6 +7,7 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
+    const int TIME = 30;
     private GameManager() { }
 
     public static GameManager I { get; private set; }
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Card card;
     public GameObject endTxt;
     public Text timeTxt;
-    float checkTime = 0;
+    int checkTime;
 
     public Card firstCard, secondCard;
 
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(InvokeCoTime());
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1f,1f)).ToArray();
 
@@ -45,13 +47,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator InvokeCoTime()
     {
-        checkTime += Time.deltaTime;
-        timeTxt.text = checkTime.ToString("N2");
-
-        if(checkTime>30)
+        yield return new WaitForSeconds(1f);
+        checkTime++;
+        timeTxt.text = checkTime.ToString();
+        if (checkTime <= TIME)
+        {
+            StartCoroutine(InvokeCoTime());
+        }
+        else
         {
             Time.timeScale = 0;
             endTxt.SetActive(true);
