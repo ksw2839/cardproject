@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Card : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Card : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Animator ani;
     public int index { get; private set; }
+
+    Action<Card> onClick; 
 
     public Card SetParent(Transform parent)
     {
@@ -35,21 +38,19 @@ public class Card : MonoBehaviour
         return this;
     }
 
+    public Card SetActionOnClick(Action<Card> callback)
+    {
+        onClick = callback;
+        return this;
+    }
+
     public void Click()
     {
         back.SetActive(false);
         front.SetActive(true);
         ani.SetBool("isClick", true);
 
-        if(GameManager.I.firstCard == null)
-        {
-            GameManager.I.firstCard = this;
-        }
-        else
-        {
-            GameManager.I.secondCard = this;
-            GameManager.I.Match();
-        }
+        onClick?.Invoke(this);
     }
 
     public void DestroyCardI()

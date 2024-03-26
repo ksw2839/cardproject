@@ -8,21 +8,15 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     const int TIME = 30;
-    private GameManager() { }
-
-    public static GameManager I { get; private set; }
     public Transform cards;
     public Card card;
     public GameObject endTxt;
     public Text timeTxt;
+    
     int checkTime;
 
-    public Card firstCard, secondCard;
+    Card firstCard, secondCard;
 
-    private void Awake()
-    {
-        I = this;
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +37,21 @@ public class GameManager : MonoBehaviour
             newCard.SetFrontSprite(sprite)
                    .SetParent(cards)
                    .SetPosition(new Vector3(x, y, 0))
-                   .SetIndex(index);
+                   .SetIndex(index)
+                   .SetActionOnClick(OnClickCard);
+        }
+    }
+
+    void OnClickCard(Card card)
+    {
+        if (firstCard == null)
+        {
+            firstCard = card;
+        }
+        else
+        {
+            secondCard = card;
+            Match();
         }
     }
 
