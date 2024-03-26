@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6437936fd7e30c46984bd70ec19457c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  front: {fileID: 8939138406560979785}
+  back: {fileID: 7040149073829502457}
   spriteRenderer: {fileID: 5253427519804678712}
   ani: {fileID: 388606131482542631}
 --- !u!114 &-2886017329730082297

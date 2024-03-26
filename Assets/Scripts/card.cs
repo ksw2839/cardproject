@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+    [SerializeField] GameObject front, back;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Animator ani;
     public int index { get; private set; }
@@ -47,8 +48,8 @@ public class Card : MonoBehaviour
 
     public void Click()
     {
-        transform.Find("back").gameObject.SetActive(false);
-        transform.Find("front").gameObject.SetActive(true);
+        back.SetActive(false);
+        front.SetActive(true);
         ani.SetBool("isClick", true);
 
         if(GameManager.I.firstCard == null)
@@ -80,8 +81,8 @@ public class Card : MonoBehaviour
 
     void CloseCard()
     {
-        transform.Find("front").gameObject.SetActive(false);
-        transform.Find("back").gameObject.SetActive(true);
+        front.SetActive(false);
+        back.SetActive(true);
         ani.SetBool("isClick", false);
     }
 
