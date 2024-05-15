@@ -7,7 +7,7 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    private GameManager() { }
+    
 
     public static GameManager I { get; private set; }
     public Transform cards;
@@ -25,18 +25,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
-        rtans = rtans.OrderBy(item => Random.Range(-1f,1f)).ToArray();
+        int[] planet = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+        planet = planet.OrderBy(item => Random.Range(-1f,1f)).ToArray();
 
         for (int i = 0; i<16; i++)
         {
-            int index = rtans[i];
+            int index = planet[i];
             Card newCard = Instantiate(card);
 
             float x = (i / 4) * 1.4f - 2.1f;
             float y = (i % 4) * 1.4f - 3f;
-            string rtanName = "rtan" + index;
-            Sprite sprite = Resources.Load<Sprite>(rtanName);
+            string cardName = "c" + index;
+            Sprite sprite = Resources.Load<Sprite>(cardName);
 
             newCard.SetFrontSprite(sprite)
                    .SetParent(cards)
